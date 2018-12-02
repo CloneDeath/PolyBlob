@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace PolyBlob.glTF {
 	public class Buffer {
-		[JsonProperty("name")]
+		[JsonProperty("name", NullValueHandling=NullValueHandling.Ignore)]
 		public string Name { get; set; }
 		
 		[JsonProperty("uri")]

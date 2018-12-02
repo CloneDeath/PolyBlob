@@ -21,10 +21,10 @@ namespace PolyBlob.glTF {
 		public AccessorType Type { get; set; }
 		
 		[JsonProperty("max")]
-		public int[] Max { get; set; }
+		public float[] Max { get; set; }
 		
 		[JsonProperty("min")]
-		public int[] Min { get; set; }
+		public float[] Min { get; set; }
 	}
 
 	public enum AccessorComponentType {

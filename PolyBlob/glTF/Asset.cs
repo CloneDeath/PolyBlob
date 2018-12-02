@@ -2,10 +2,10 @@ using Newtonsoft.Json;
 
 namespace PolyBlob.glTF {
 	public class Asset {
-		[JsonProperty("copyright")]
+		[JsonProperty("copyright", NullValueHandling=NullValueHandling.Ignore)]
 		public string Copyright { get; set; }
 
-		[JsonProperty("generator")]
+		[JsonProperty("generator", NullValueHandling=NullValueHandling.Ignore)]
 		public string Generator { get; set; } = "PolyBlob";
 
 		[JsonProperty("version")]
