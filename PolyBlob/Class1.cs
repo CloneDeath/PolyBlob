@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PolyBlob
+﻿namespace PolyBlob
 {
     public class Class1
     {
