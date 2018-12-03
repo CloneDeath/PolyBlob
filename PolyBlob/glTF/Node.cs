@@ -5,8 +5,8 @@ namespace PolyBlob.glTF {
 		[JsonProperty("name", NullValueHandling=NullValueHandling.Ignore)]
 		public string Name { get; set; }
 		
-		[JsonProperty("mesh")]
-		public int Mesh { get; set; }
+		[JsonProperty("mesh", NullValueHandling=NullValueHandling.Ignore)]
+		public int? Mesh { get; set; }
 		
 		[JsonProperty("children", NullValueHandling=NullValueHandling.Ignore)]
 		public int[] Children { get; set; }
