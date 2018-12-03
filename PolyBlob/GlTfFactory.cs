@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using PolyBlob.glTF;
 using Mesh = PolyBlob.Models.Mesh;
 using Node = PolyBlob.Models.Node;
@@ -55,7 +56,12 @@ namespace PolyBlob {
 			return new glTF.Node {
 				Name = node.Name,
 				Children = GetNodeIndexes(node.Children),
-				Mesh = node.Mesh == null ? (int?)null : _worldCache.Meshes.GetId(node.Mesh)
+				Mesh = node.Mesh == null ? (int?)null : _worldCache.Meshes.GetId(node.Mesh),
+				Translation = node.Position == Vector3.Zero ? null : new[] {
+					node.Position.X,
+					node.Position.Y,
+					node.Position.Z
+				}
 			};
 		}
 

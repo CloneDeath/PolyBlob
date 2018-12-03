@@ -12,15 +12,15 @@ namespace PolyBlob.glTF {
 		public int[] Children { get; set; }
 
 		[JsonProperty("rotation", NullValueHandling=NullValueHandling.Ignore)]
-		public double[] Rotation { get; set; }
+		public float[] Rotation { get; set; }
 
 		[JsonProperty("scale", NullValueHandling=NullValueHandling.Ignore)]
-		public double[] Scale { get; set; }
+		public float[] Scale { get; set; }
 
 		[JsonProperty("translation", NullValueHandling=NullValueHandling.Ignore)]
-		public double[] Translation { get; set; }
+		public float[] Translation { get; set; }
 		
 		[JsonProperty("matrix", NullValueHandling=NullValueHandling.Ignore)]
-		public double[] Matrix { get; set; }
+		public float[] Matrix { get; set; }
 	}
 }
