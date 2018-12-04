@@ -1,12 +1,8 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
-using PolyBlob.glTF;
-using Mesh = PolyBlob.Models.Mesh;
-using Node = PolyBlob.Models.Node;
-using Primitive = PolyBlob.Models.Primitive;
-using Scene = PolyBlob.Models.Scene;
-using World = PolyBlob.Models.World;
+using PolyBlob.Models;
 
 namespace PolyBlob {
 	public class GlTfFactory {
@@ -27,7 +23,8 @@ namespace PolyBlob {
 				Meshes = GetMeshes(_worldCache.Meshes),
 				Buffers = GetResourcesInOrder(_glTfCache.Buffers),
 				BufferViews = GetResourcesInOrder(_glTfCache.BufferViews),
-				Accessors = GetResourcesInOrder(_glTfCache.Accessors)
+				Accessors = GetResourcesInOrder(_glTfCache.Accessors),
+				Materials = GetResourcesInOrder(_glTfCache.Materials)
 			};
 		}
 
@@ -86,11 +83,38 @@ namespace PolyBlob {
 
 		private glTF.Primitive Translate(Primitive primitive) {
 			var pointAccessors = _glTfCache.Register(primitive.Points);
-			return new glTF.Primitive {
+			var result = new glTF.Primitive {
 				Indices = pointAccessors.IndiciesId,
-				Attributes = new Attributes {
+				Attributes = new glTF.Attributes {
 					Position = pointAccessors.PositionsId
 				}
+			};
+			if (primitive.Material != null) {
+				var material = Translate(primitive.Material);
+				_glTfCache.Materials.Register(material);
+				result.Material = _glTfCache.Materials.GetId(material);
+			}
+			return result;
+		}
+
+		private glTF.Material Translate(Material material) {
+			return new glTF.Material {
+				Name = material.Name,
+				DoubleSided = material.DoubleSided,
+				PbrMetallicRoughness = new glTF.PbrMetallicRoughness {
+					BaseColorFactor = GetBaseColorFactor(material.BaseColor),
+					MetallicFactor = material.MetallicFactor,
+					RoughnessFactor = material.RoughnessFactor
+				}
+			};
+		}
+
+		private float[] GetBaseColorFactor(Color color) {
+			return new[] {
+				color.R / 255.0f,
+				color.G / 255.0f,
+				color.B / 255.0f,
+				color.A / 255.0f
 			};
 		}
 

@@ -10,6 +10,7 @@ namespace PolyBlob {
 		public IndexedResourceCollection<Buffer> Buffers { get; } = new IndexedResourceCollection<Buffer>();
 		public IndexedResourceCollection<BufferView> BufferViews { get; } = new IndexedResourceCollection<BufferView>();
 		public IndexedResourceCollection<Accessor> Accessors { get; } = new IndexedResourceCollection<Accessor>();
+		public IndexedResourceCollection<Material> Materials { get; } = new IndexedResourceCollection<Material>();
 
 		public class PointsBufferData {
 			public int IndiciesId;

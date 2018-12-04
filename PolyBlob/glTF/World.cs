@@ -25,5 +25,8 @@ namespace PolyBlob.glTF {
 		
 		[JsonProperty("accessors", NullValueHandling=NullValueHandling.Ignore)]
 		public Accessor[] Accessors { get; set; }
+		
+		[JsonProperty("materials", NullValueHandling=NullValueHandling.Ignore)]
+		public Material[] Materials { get; set; }
 	}
 }

@@ -7,5 +7,8 @@ namespace PolyBlob.glTF {
 		
 		[JsonProperty("indices")]
 		public int Indices { get; set; }
+		
+		[JsonProperty("material", NullValueHandling=NullValueHandling.Ignore)]
+		public int? Material { get; set; }
 	}
 }

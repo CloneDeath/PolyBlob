@@ -7,22 +7,32 @@ namespace PolyBlob.Sample.Vehicle {
 	public class TireMesh : Mesh {
 		public TireMesh(int points) {
 			Name = "tire";
-			var pointData = new List<Vector3>();
-			for (var i = 0; i < points; i++) {
-				pointData.AddRange(GetTriangleArc(i, points));
-			}
+			
 			Primitives = new List<Primitive> {
 				new Primitive {
-					Points = pointData
+					Points = GetCircle(points, 1f, 1.1f),
+					Material = new RubberMaterial()
+				},
+				new Primitive {
+					Points = GetCircle(points, 0, 1),
+					Material = new MetalMaterial()
 				}
 			};
 		}
 
-		private IEnumerable<Vector3> GetTriangleArc(int start, int total) {
+		private List<Vector3> GetCircle(int points, float min, float max) {
+			var pointData = new List<Vector3>();
+			for (var i = 0; i < points; i++) {
+				pointData.AddRange(GetTriangleArc(i, points, min, max));
+			}
+			return pointData;
+		}
+
+		private IEnumerable<Vector3> GetTriangleArc(int start, int total, float min, float max) {
 			return new List<Vector3> {
-				GetPointOnArc(start, total),
-				GetPointOnArc(start + 1, total),
-				Vector3.Zero
+				GetPointOnArc(start, total) * max,
+				GetPointOnArc(start + 1, total) * max,
+				GetPointOnArc(start, total) * min
 			};
 		}
 
